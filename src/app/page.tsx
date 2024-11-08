@@ -1,6 +1,36 @@
 import Image from "next/image";
+import { useState } from "react";
 
 export default function Home() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [endpoint, setEndpoint] = useState("");
+  const [connectionStatus, setConnectionStatus] = useState("");
+  const [config, setConfig] = useState({ username: "", password: "", endpoint: "" });
+
+  const testConnection = () => {
+    // Placeholder for connection testing logic
+    setConnectionStatus("Connection successful!");
+  };
+
+  const saveConfig = () => {
+    setConfig({ username, password, endpoint });
+    localStorage.setItem("opensearchConfig", JSON.stringify({ username, password, endpoint }));
+  };
+
+  const loadConfig = () => {
+    const savedConfig = JSON.parse(localStorage.getItem("opensearchConfig") || "{}");
+    setUsername(savedConfig.username || "");
+    setPassword(savedConfig.password || "");
+    setEndpoint(savedConfig.endpoint || "");
+  };
+
+  const viewJson = () => {
+    const json = JSON.stringify({ username, password, endpoint }, null, 2);
+    navigator.clipboard.writeText(json);
+    alert("Configuration copied to clipboard:\n" + json);
+  };
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
@@ -48,6 +78,44 @@ export default function Home() {
             Read our docs
           </a>
         </div>
+
+        <section className="flex flex-col gap-4 mt-8">
+          <h2 className="text-lg font-semibold">OpenSearch Connection Configuration</h2>
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="border p-2 rounded"
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="border p-2 rounded"
+          />
+          <input
+            type="text"
+            placeholder="Endpoint"
+            value={endpoint}
+            onChange={(e) => setEndpoint(e.target.value)}
+            className="border p-2 rounded"
+          />
+          <button onClick={testConnection} className="bg-blue-500 text-white p-2 rounded">
+            Test Connection
+          </button>
+          {connectionStatus && <p>{connectionStatus}</p>}
+          <button onClick={saveConfig} className="bg-green-500 text-white p-2 rounded">
+            Save Configuration
+          </button>
+          <button onClick={loadConfig} className="bg-yellow-500 text-white p-2 rounded">
+            Load Configuration
+          </button>
+          <button onClick={viewJson} className="bg-gray-500 text-white p-2 rounded">
+            View JSON
+          </button>
+        </section>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
         <a
