@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import { useState } from "react";
+import Link from 'next/link';
 
 export default function Home() {
   const [username, setUsername] = useState("");
@@ -116,6 +119,71 @@ export default function Home() {
             View JSON
           </button>
         </section>
+
+        <nav className="bg-gray-800 p-4 text-white mt-8">
+          <ul className="flex space-x-4">
+            <li>
+              <Link href="/index-overview">
+                <a>Index Overview</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/index-management">
+                <a>Index Management</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/mapping-editor">
+                <a>Mapping Editor</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/analyzer-dashboard">
+                <a>Analyzer Dashboard</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/analyzer-editor">
+                <a>Analyzer Editor</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/analyzer-testing-tool">
+                <a>Analyzer Testing Tool</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/search-interface">
+                <a>Search Interface</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/advanced-search">
+                <a>Advanced Search</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/search-results">
+                <a>Search Results</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/multi-index-search">
+                <a>Multi-Index Search</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/loading-indicators">
+                <a>Loading Indicators</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/theming">
+                <a>Theming</a>
+              </Link>
+            </li>
+          </ul>
+        </nav>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
         <a
